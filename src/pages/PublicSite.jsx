@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import { Avatar } from "../components/Avatar";
 import { SchedulingModal } from "../components/SchedulingModal";
@@ -90,12 +91,16 @@ export default function PublicSite() {
           padding: "0 32px", height: 64,
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <Link
+          to="/"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none" }}
+        >
           <div style={{ width: 36, height: 36, background: "linear-gradient(135deg, #2C6E8A, #1A5276)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <span style={{ color: "#fff", fontSize: 18 }}>🦷</span>
           </div>
           <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: 18, color: "#1A3A4A", letterSpacing: 0.3 }}>Dente Vivo</span>
-        </div>
+        </Link>
 
         <div style={{ display: "flex", gap: 28, alignItems: "center" }}>
           {navLinks.map((l) => (
