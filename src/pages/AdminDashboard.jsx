@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import { formatDate, formatTime } from "../components/Avatar";
+import { AgendaManager } from "../components/AgendaManager";
 
 const STATUS_LABEL = {
   pending: "Pendente",
@@ -22,6 +23,7 @@ export default function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [actioningId, setActioningId] = useState(null);
   const [filter, setFilter] = useState("pending");
+  const [section, setSection] = useState("agendamentos");
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -90,6 +92,30 @@ export default function AdminDashboard() {
       </header>
 
       <main style={{ maxWidth: 900, margin: "0 auto", padding: "32px 24px" }}>
+        <div style={{ display: "flex", gap: 8, marginBottom: 28, borderBottom: "1px solid #DDE8EE", paddingBottom: 16 }}>
+          {[
+            ["agendamentos", "📋 Agendamentos"],
+            ["agenda", "🗓️ Agenda dos dentistas"],
+          ].map(([key, label]) => (
+            <button
+              key={key}
+              onClick={() => setSection(key)}
+              style={{
+                padding: "8px 18px", borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: "pointer",
+                border: "none",
+                background: section === key ? "#1A3A4A" : "transparent",
+                color: section === key ? "#fff" : "#4A6572",
+              }}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
+        {section === "agenda" && <AgendaManager />}
+
+        {section === "agendamentos" && (
+        <>
         <h1 style={{ fontSize: 22, fontWeight: 700, color: "#1A3A4A", marginBottom: 6 }}>Agendamentos</h1>
         <p style={{ fontSize: 13, color: "#8AA4B0", marginBottom: 24 }}>Confirme ou recuse os pedidos de consulta feitos pelo site.</p>
 
@@ -176,6 +202,8 @@ export default function AdminDashboard() {
               );
             })}
           </div>
+        )}
+        </>
         )}
       </main>
     </div>
