@@ -272,8 +272,10 @@ export default function PublicSite() {
           <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: 15, color: "#fff" }}>Dente Vivo</span>
         </div>
         <p style={{ color: "rgba(255,255,255,0.35)", fontSize: 12 }}>© 2026 Clínica Dente Vivo. Todos os direitos reservados.</p>
-        <p style={{ color: "rgba(255,255,255,0.2)", fontSize: 11, marginTop: 8 }}>
-          <a href="/admin/login" style={{ color: "inherit", textDecoration: "none" }}>Acesso da equipe</a>
+        <p style={{ marginTop: 10 }}>
+          <Link to="/admin/login" style={{ color: "rgba(255,255,255,0.65)", fontSize: 13, fontWeight: 500, textDecoration: "underline" }}>
+            Acesso da equipe
+          </Link>
         </p>
       </footer>
 
